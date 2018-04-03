@@ -3,6 +3,7 @@
 namespace PageMediaGallery;
 
 use GroupsPage\GroupsPageCore;
+use PFFormEdit;
 
 class Hooks {
 
@@ -23,11 +24,12 @@ class Hooks {
 		global $wgOut, $wgScriptPath, $wgJsMimeType, $wgFileExtensions, $wgUser, $wgpmgEnabledForms;
 
 		if($wgpmgEnabledForms && isset($pFFormEdit) && isset($pFFormEdit->mForm)) {
+
 			if ( ! in_array($pFFormEdit->mForm, $wgpmgEnabledForms)) {
 				// pagemediagallery is not enable for this form :
 				return ;
 			}
-		} else if ($wgpmgEnabledForms) {
+		} else if ($wgpmgEnabledForms && ! $pFFormEdit instanceof PFFormEdit) {
 			// pagemediagallery not enable out of pageForms:
 			return ;
 		}
