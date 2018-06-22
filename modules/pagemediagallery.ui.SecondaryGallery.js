@@ -170,7 +170,11 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 	 * @param tempToReplace fir an image just being uploaded, indicate the corresponding tempImage to remove before adding this one
 	 * @return {jQuery} li element added
 	 */
-	pagemediagallery.ui.SecondaryGallery.prototype.addThumb = function ( img, filename, isTemp = false, tempToReplace = false ) {
+	pagemediagallery.ui.SecondaryGallery.prototype.addThumb = function ( img, filename, isTemp, tempToReplace) {
+			
+		var isTemp = isTemp || false;
+		var tempToReplace = tempToReplace || false;	
+
 		var li;
 
 		var ext = filename.substr(filename.lastIndexOf('.') + 1);
