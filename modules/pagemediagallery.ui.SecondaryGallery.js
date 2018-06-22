@@ -393,12 +393,12 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 	var addDropOverClass = function (target) {
 		// as style is set on element by msupload, adding class is not enought, we must change style on element
-		target.css('border', '2px solid #2c9ab7');
+		target.css('border', '2px solid var(--main-btn-color)');
 		target.addClass('dropOverActive');
 	}
 	var removeDropOverClass = function (target) {
 		target.removeClass('dropOverActive');
-		target.css('border', '2px dotted #2c9ab7');
+		target.css('border', '2px dotted var(--main-btn-color)');
 	}
 
 	pagemediagallery.ui.SecondaryGallery.prototype.manageDropOnFormField = function () {
@@ -406,7 +406,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var secondaryGallery = this;
 		var target = $(this.$container);
 
-		target.css('border', '2px dotted #2c9ab7');
+		target.css('border', '2px dotted var(--main-btn-color)');
 		if(target.find('.dropHelp').length == 0) {
 			target.append('<span class="dropHelp">'+mw.msg( 'msu-dropzone' )+'</span>');
 		}

@@ -1,4 +1,5 @@
 
+pagemediagallery = pagemediagallery || {};
 pagemediagallery.ui = pagemediagallery.ui || {};
 
 ( function ( $, mw, pagemediagallery, MsUpload ) {

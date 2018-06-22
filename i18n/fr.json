@@ -3,7 +3,7 @@
 		"authors": [
 		]
 	},
-	"pmg-desc": "Permet l'upload facile d'image sur une page, et de gerer un gallery d'image par page'",
+	"pmg-desc": "Permet l'upload facile d'images sur une page, et de gérer une galerie d'images par page'",
 	"pmg-gallery-title": "Galerie d'images",
-	"pmg-gallery-subtitle": "Uploadez vos images dans la gallerie du tutoriel, puis glissez-les sur chaque étapes.\nTaille max des images : 2 Mo. Préférez le format paysage."
+	"pmg-gallery-subtitle": "Uploadez vos images dans la galerie du tutoriel, puis glissez-les sur chaque étape.\nTaille max des images : 2 Mo. Préférez le format paysage."
 }

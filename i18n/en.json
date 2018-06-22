@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+		]
+	},
+	"pmg-desc": "Allows easy upload of images on a page, and manage one image gallery per page",
+	"pmg-gallery-title": "Image Gallery",
+	"pmg-gallery-subtitle": "Upload your images in the tutorial gallery, then drag them on each step.\nMaximum image size: 10 MB. Prefer landscape format."
+}
