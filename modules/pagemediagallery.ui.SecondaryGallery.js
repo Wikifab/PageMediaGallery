@@ -498,8 +498,8 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			//check space :
 			if ( ! secondaryGallery.hasEmptiesSlots() || 
 				secondaryGallery.filesUploading.length + files.length > secondaryGallery.numberEmptiesSlots()) {
-				//secondaryGallery.dispErrorMessage(mw.msg( 'msu-upload-nbfile-exceed' ));
-				//return;
+				secondaryGallery.dispErrorMessage(mw.msg( 'msu-upload-nbfile-exceed' ));
+				return;
 			}
 
 			if ( secondaryGallery.numberEmptiesSlots() - files.length == 0 ) {
