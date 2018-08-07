@@ -504,7 +504,9 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 			if ( secondaryGallery.numberEmptiesSlots() - files.length == 0 ) {
 				//hide add new file slot
-				if ( $('.add-new-file-slot') ) $('.add-new-file-slot').hide();
+				console.log("secondaryGallery");
+				console.log(secondaryGallery);
+				if ( $($(secondaryGallery.$container).find('.add-new-file-slot')).get(0) ) $($($(secondaryGallery.$container).find('.add-new-file-slot')).get(0)).hide();
 			}
 
 			secondaryGallery.primaryGallery.open();
