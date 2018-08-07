@@ -112,15 +112,32 @@ body {
 }
 
 .formmediagallery{
-	padding:2px 0 2px 2px;
+    padding: 2% 1%;
 }
 .formmediagallery ul{
 	margin:0px;
 	padding:0px;	
 }
-.formmediagallery li:first-child {
-	width: 99%;
-	height: auto;
+
+.msuploadOneImage .formmediagallery li {
+    width: 100%;
+    height: 200px;
+    margin: 0px;
+}
+
+.formmediagallery li {
+    display: inline-block;
+    position: relative;
+    width: 31.33%;
+    margin: 0% 1% 1%;
+    height: 100px;
+    overflow: hidden;
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.formmediagallery li div {
+    height: 100px;
 }
 
 .formmediagallery .mw-ia-editButton, .formmediagallery li .file-cancel {
@@ -154,23 +171,11 @@ body {
 	cursor: move;
 }
 
-.formmediagallery li {
-	display: inline-block;
-	position: relative;
-	width: 19%;
-	margin: 0% 0.5%;
-	border: 1px solid #ccc;
-	height: 76px;
-	overflow: hidden;
-	background: #f1f1f1;
-}
-.formmediagallery ul li {
-	min-height: 42px;
-}
 .formmediagallery li img {
-	width:100%;
-	min-height: 74px;
-	height:auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .formmediagallery li .thumbimage {
 	display:none;
@@ -196,19 +201,10 @@ body {
     border-radius: 50px;
 }
 
-.formmediagallery{
-	min-height:100px;
-}
-
 .formmediagallery .tempFileLoader {
 	background: url(images/upload.png) no-repeat center center;
     width: 100%;
     height: 100%;
-}
-.formmediagallery .tempFileLoader:before{
-	content: "";
-	display: block;
-	padding-top: 66%; 	/* initial ratio of 3:2*/
 }
 
 .msuploadContainer .errorMessage{
@@ -276,4 +272,71 @@ body {
 	display:block;
 	text-align:center;
     margin-top: 9px;
+}
+
+.pfImagePreviewWrapper canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.fileToBeUpload .pfImagePreviewWrapper {
+    opacity: 0.5;
+}
+
+.pfImagePreviewWrapper .msu-progress-bar {
+    border: 1px solid grey;
+    background-color: white;
+    height: 22px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.pfImagePreviewWrapper .msu-progress-bar-progress {
+    background-color: #00bdda;
+    border-radius: 3px;
+    height: 100%;
+    width: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.formmediagallery div.add-new-file-slot{
+    background-color: #bcf2ff;
+    border: 2px dashed #0086ba;
+}
+
+.formmediagallery .unsortable:hover{
+    cursor: initial;
+}
+
+.formmediagallery div.add-new-file-slot:hover{
+    cursor: pointer;
+}
+
+.formmediagallery div.add-new-file-slot{
+    display: inline-block;
+    position: relative;
+    width: 31.33%;
+    margin: 0% 1% 1%;
+    height: 100px;
+    overflow: hidden;
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.add-new-file-slot i.fa-plus{
+    font-size: 24px;
+    top: 50%;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin-top: -12px;
+    right: 50%;
+    margin-right: -12px;
+    color: #0086ba;
 }
