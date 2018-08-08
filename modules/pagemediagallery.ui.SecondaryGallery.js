@@ -39,17 +39,6 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var ul = $('<ul>');
 		this.ol.append(ul);
 
-		var div = $('<div>').addClass('add-new-file-slot unsortable');
-		div.click(function (element){
-			if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
-				$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
-			}
-		});
-		div.append($('<i>').addClass('fa fa-plus'));
-		ul.append(div);
-		if ( !this.hasEmptiesSlots() ){
-			div.hide();
-		}
 		$(this.$container).prepend(this.ol);
 
 		this.addUploadButton();
@@ -136,6 +125,22 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		$(this.$container).append(this.buttonbar);
 
 		this.addBrowseButton();
+
+		var formmediagallery_ul = $('.formmediagallery ul');
+		if ( formmediagallery_ul ) {
+			var div = $('<div>').addClass('add-new-file-slot unsortable');
+			div.click(function (element){
+				if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
+					$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
+				}
+			});
+			div.append($('<i>').addClass('fa fa-plus'));
+			formmediagallery_ul.append(div);
+
+			if ( !this.hasEmptiesSlots() ){
+				div.hide();
+			}
+		}
 	}
 
 	pagemediagallery.ui.SecondaryGallery.prototype.updateUploadButtonVisibility = function () {
@@ -147,6 +152,20 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 	};
 
 	pagemediagallery.ui.SecondaryGallery.prototype.addFileToUpload = function (file) {
+
+		var secondaryGallery = this;
+
+		if ( ! secondaryGallery.hasEmptiesSlots() || 
+			secondaryGallery.filesUploading.length + 1 > secondaryGallery.numberEmptiesSlots()) {
+			secondaryGallery.dispErrorMessage(mw.msg( 'msu-upload-nbfile-exceed' ));
+			return;
+		}
+
+		if ( secondaryGallery.numberEmptiesSlots() - (secondaryGallery.filesUploading.length + 1) <= 0 ) {
+			//hide add new file slot
+			if ( $($(secondaryGallery.$container).find('.add-new-file-slot')).get(0) ) $($($(secondaryGallery.$container).find('.add-new-file-slot')).get(0)).hide();
+		}
+
 		this.filesUploading.push( new pagemediagallery.ui.FileUploading(file,this));
 	}
 
@@ -223,7 +242,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			li.addClass('fileToBeUpload');
 		}
 
-		$(this.$container).find('.formmediagallery ul').prepend(li);
+		$(this.$container).find('.formmediagallery ul .add-new-file-slot').before(li);
 
 		mw.hook('pmg.secondaryGallery.newThumbAdded').fire(li);
 
@@ -239,6 +258,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var filename = $(closeButton).parents('li').attr('data-filename');
 		$(closeButton).parents('li').remove();
 		if (filename) {
+
 			var inputs = $(this.$container).find('input.createboxInput');
 			if (inputs.length == 0) {
 				this.updateUploadButtonVisibility();
@@ -258,8 +278,17 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			this.updateUploadButtonVisibility();
 			this.updateImageInputsValues();
 
+			var filesUploading = $(this.filesUploading);
+			var elem = filesUploading.filter(function() {
+				return this.file.name == filename;
+			});
+			this.filesUploading.splice(this.filesUploading.indexOf(elem),1);
+
 			if(secondaryGallery.hasEmptiesSlots()){
-				if ( $('.add-new-file-slot') && $('.add-new-file-slot').is(':hidden') ) $('.add-new-file-slot').show();
+				var container = $(this.$container);
+				if ( $(container.find('.add-new-file-slot')).get(0) && $($(container.find('.add-new-file-slot')).get(0)).is(':hidden') ) {
+					$($(container.find('.add-new-file-slot')).get(0)).show();
+				}
 			}
 		}
 	};
@@ -495,20 +524,6 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 			var files = e.originalEvent.dataTransfer.files;
 
-			//check space :
-			if ( ! secondaryGallery.hasEmptiesSlots() || 
-				secondaryGallery.filesUploading.length + files.length > secondaryGallery.numberEmptiesSlots()) {
-				secondaryGallery.dispErrorMessage(mw.msg( 'msu-upload-nbfile-exceed' ));
-				return;
-			}
-
-			if ( secondaryGallery.numberEmptiesSlots() - files.length == 0 ) {
-				//hide add new file slot
-				console.log("secondaryGallery");
-				console.log(secondaryGallery);
-				if ( $($(secondaryGallery.$container).find('.add-new-file-slot')).get(0) ) $($($(secondaryGallery.$container).find('.add-new-file-slot')).get(0)).hide();
-			}
-
 			secondaryGallery.primaryGallery.open();
 
 			secondaryGallery.affFilesToLoad(files);
@@ -544,7 +559,5 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 				});
 
 	}
-
-
 
 }( jQuery, mediaWiki, pagemediagallery ) );

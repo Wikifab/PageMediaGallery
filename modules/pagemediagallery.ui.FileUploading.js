@@ -112,6 +112,14 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		if ( fileid ) {
 			$('div[data-fileid=' + fileid + ']').parent('.fileToBeUpload').removeClass('fileToBeUpload');
 		}
+
+		//remove file from FilesUploading
+		var filesUploading = $(this.secondaryGallery.filesUploading);
+		var elem = filesUploading.filter(function() {
+			return this.file.name === file.name;
+		});
+		this.secondaryGallery.filesUploading.splice(this.secondaryGallery.filesUploading.indexOf(elem),1);
+
 	};
 
 	pagemediagallery.ui.FileUploading.prototype.cancelUpload = function ( file ) {
