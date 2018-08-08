@@ -39,6 +39,19 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var ul = $('<ul>');
 		this.ol.append(ul);
 
+		var div = $('<div>').addClass('add-new-file-slot unsortable');
+		div.click(function (element){
+			if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
+				$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
+			}
+		});
+		div.append($('<i>').addClass('fa fa-plus'));
+		ul.append(div);
+
+		if ( !this.hasEmptiesSlots() ){
+			div.hide();
+		}
+
 		$(this.$container).prepend(this.ol);
 
 		this.addUploadButton();
@@ -125,22 +138,6 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		$(this.$container).append(this.buttonbar);
 
 		this.addBrowseButton();
-
-		var formmediagallery_ul = $('.formmediagallery ul');
-		if ( formmediagallery_ul ) {
-			var div = $('<div>').addClass('add-new-file-slot unsortable');
-			div.click(function (element){
-				if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
-					$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
-				}
-			});
-			div.append($('<i>').addClass('fa fa-plus'));
-			formmediagallery_ul.append(div);
-
-			if ( !this.hasEmptiesSlots() ){
-				div.hide();
-			}
-		}
 	}
 
 	pagemediagallery.ui.SecondaryGallery.prototype.updateUploadButtonVisibility = function () {
