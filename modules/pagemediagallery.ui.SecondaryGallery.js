@@ -421,7 +421,8 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			var fileinput = this.getInputForFile(filename);
 			mw.hook('pmg.secondaryGallery.newImageAdded').fire(fileinput, newItem);
 		}
-		this.uploadButton.hide();
+
+		if (tempToReplace) this.uploadButton.hide();
 
 		// TODO fire event to allow adding edit image tools
 	};
