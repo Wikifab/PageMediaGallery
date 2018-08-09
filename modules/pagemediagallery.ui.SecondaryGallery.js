@@ -158,7 +158,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			return;
 		}
 
-		if ( secondaryGallery.numberEmptiesSlots() - (secondaryGallery.filesUploading.length + 1) <= 0 ) {
+		if ( secondaryGallery.numberEmptiesSlots() - (secondaryGallery.filesUploading.length + 1 ) <= 0 ) {
 			//hide add new file slot
 			if ( $($(secondaryGallery.$container).find('.add-new-file-slot')).get(0) ) $($($(secondaryGallery.$container).find('.add-new-file-slot')).get(0)).hide();
 		}
@@ -401,12 +401,14 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var secondaryGallery = this;
 
 		if ( ! secondaryGallery.hasEmptiesSlots() || 
-			secondaryGallery.filesUploading.length + 1 > secondaryGallery.numberEmptiesSlots()) {
+			( secondaryGallery.filesUploading.length + 1 > secondaryGallery.numberEmptiesSlots() ) && !tempToReplace) {
 			secondaryGallery.dispErrorMessage(mw.msg( 'msu-upload-nbfile-exceed' ));
 			return;
 		}
 
-		if ( secondaryGallery.numberEmptiesSlots() - (secondaryGallery.filesUploading.length + 1) <= 0 ) {
+		var fileFromGallery = tempToReplace ? 0 : 1;
+
+		if ( secondaryGallery.numberEmptiesSlots() - (secondaryGallery.filesUploading.length + fileFromGallery) <= 0 ) {
 			//hide add new file slot
 			if ( $($(secondaryGallery.$container).find('.add-new-file-slot')).get(0) ) $($($(secondaryGallery.$container).find('.add-new-file-slot')).get(0)).hide();
 		}
