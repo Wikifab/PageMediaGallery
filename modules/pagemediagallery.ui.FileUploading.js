@@ -190,10 +190,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 	 * static method to listen FileAdded event and call updateFileTempImage on corresponding items
 	 */
 	pagemediagallery.ui.FileUploading.onFilesAdded = function (uploader, files) {
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 		for (var a = 0; a < files.length; a++) {
 			var file = files[a];
 
