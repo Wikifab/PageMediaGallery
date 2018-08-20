@@ -128,7 +128,7 @@ body {
 .formmediagallery li {
     display: inline-block;
     position: relative;
-    width: 31.3%;
+    width: 31.33%;
     margin: 0% 1% 1%;
     height: 100px;
     overflow: hidden;
@@ -305,11 +305,6 @@ body {
     left: 0;
 }
 
-.formmediagallery div.add-new-file-slot{
-    background-color: #bcf2ff;
-    border: 2px dashed #0086ba;
-}
-
 .formmediagallery .unsortable:hover{
     cursor: initial;
 }
@@ -325,18 +320,18 @@ body {
     margin: 0% 1% 1%;
     height: 100px;
     overflow: hidden;
+    text-align: center;
     background: #f1f1f1;
     border-radius: 3px;
+    background-color: #f3fdff;
+    border: 2px dashed #52bad5;
+    transition: 0.2s;
 }
 
 .add-new-file-slot i.fa-plus{
     font-size: 24px;
-    top: 50%;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    margin-top: -12px;
-    right: 50%;
-    margin-right: -12px;
-    color: #0086ba;
+    color: #52bad5;
+    background-color: #e4faff;
+    padding-top: 36px;
+    border: 2px solid #52bad5;
 }
