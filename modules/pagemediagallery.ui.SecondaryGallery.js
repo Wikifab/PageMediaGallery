@@ -505,17 +505,17 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			target.append('<span class="dropHelp">'+mw.msg( 'msu-dropzone' )+'</span>');
 		}
 		target.off( "dragenter").on('dragenter', function (e)
-				{
-				    e.stopPropagation();
-				    e.preventDefault();
-					addDropOverClass($(this));
-				});
+		{
+		    e.stopPropagation();
+		    e.preventDefault();
+			addDropOverClass($(this));
+		});
 		target.off( "dragleave").on('dragleave', function (e)
-				{
-				    e.stopPropagation();
-				    e.preventDefault();
-				    removeDropOverClass($(this));
-				});
+		{
+		    e.stopPropagation();
+		    e.preventDefault();
+		    removeDropOverClass($(this));
+		});
 		target.off( "dragover").on('dragover', function (e)
 		{
 		     e.stopPropagation();

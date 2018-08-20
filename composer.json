@@ -1,9 +1,9 @@
 {
-    "name": "wikifab/PageMediaGallery",
+    "name": "wikifab/page-media-gallery",
     "description": "This is a mediawiki extension to add a file gallery on pages.",
     "type": "mediawiki-extension",
     "require": {
-    	"wikifab/MmsUpload":"*",
-    	"wikifab/GroupsPage": "*"
+    	"wikifab/mms-upload":"*",
+    	"wikifab/groups-page": "*"
     }
 }
