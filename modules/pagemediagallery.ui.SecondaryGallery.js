@@ -225,8 +225,9 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		} else {
 			li = $('<li>').attr('data-filename', filename).append(imageWrapper);
 		}
-		if (imageWrapper.find('video').length > 0){
-			$('<span>').addClass('video-player').prependTo(imageWrapper);
+		var $videoHtml = imageWrapper.find('video');
+		if ($videoHtml.length > 0){
+			$videoHtml.wrap('<div class="videofile"></div>');
 		}
 		if (ext == 'stl'){
 			$('<span>').addClass('stl-file').prependTo(imageWrapper);

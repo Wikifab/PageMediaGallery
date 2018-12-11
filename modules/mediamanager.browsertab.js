@@ -168,22 +168,23 @@ mediaWiki.pagemediagallery = mediaWiki.pagemediagallery || {};
 
 		$.each( results.search, function ( index, value ) {
 			var $div = $( document.createElement('div') );
-			$div.addClass( 'image' );
 			$div.attr('data-imagename', value.filename);
 			
-			var $img;
+			var $file;
 
 			if (isVideo(value.fileurl)) {
-				$img = $( document.createElement('video') );
+				$file = $( document.createElement('video') );
+				$div.addClass('videofile');
 			} else {
-				$img = $( document.createElement('img') );
+				$file = $( document.createElement('img') );
+				$div.addClass( 'image' );
 			}
 
-			$img.attr('src', value.fileurl);
-			$img.addClass('file-thumb');
+			$file.attr('src', value.fileurl);
+			$file.addClass('file-thumb');
 			var $label = $( document.createElement('label') );
 			$label.html(value.filename);
-			$div.append($img);
+			$div.append($file);
 			$div.append($label);
 			$div.on('click', function() {
 				$(this).toggleClass( 'toAddToPage' );
