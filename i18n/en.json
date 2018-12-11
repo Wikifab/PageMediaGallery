@@ -5,5 +5,14 @@
 	},
 	"pmg-desc": "Allows easy upload of images on a page, and manage one image gallery per page",
 	"pmg-gallery-title": "Image Gallery",
-	"pmg-gallery-subtitle": "Upload your images in the tutorial gallery, then drag them on each step.\nMaximum image size: 10 MB. Prefer landscape format."
+	"pmg-gallery-subtitle": "Upload your images in the tutorial gallery, then drag them on each step.\nMaximum image size: 10 MB. Prefer landscape format.",
+	"pmg-error-encountered": "An error occured",
+	"pmg-no-match-found": "No result found.",
+	"pmg-no-more-match-found": "No more result found.",
+	"pmg-mediamanager-title": "Media gallery",
+	"pmg-cancel": "Cancel",
+	"pmg-insert-to-page": "Insert into page",
+	"pmg-tab-search": "Search",
+	"pmg-tab-upload": "Upload",
+	"pmg-tab-mymedia": "My medias"
 }

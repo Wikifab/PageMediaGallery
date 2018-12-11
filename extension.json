@@ -2,18 +2,24 @@
 	"name": "PageMediaGallery",
 	"version": "0.0.0",
 	"author": [
-		"Pierre Boutet"
+		"Pierre Boutet",
+		"Julien"
 	],
 	"url": "https://github.com/Wikifab/PageMediaGallery",
 	"descriptionmsg": "imagesGallery-desc",
 	"license-name": "MIT",
 	"type": "other",
 	"AutoloadClasses": {
-		"PageMediaGallery\\Hooks": "includes/Hooks.php"
+		"PageMediaGallery\\Hooks": "includes/Hooks.php",
+		"PageMediaGallery\\ApiBrowse": "includes/ApiBrowse.php"
 	},
 	"config": {
 		"PageMediaGalleryFoo": true,
-		"pmgEnabledForms" : false
+		"pmgEnabledForms" : false,
+		"PageMediaGallerySearchLimit": 10
+	},
+	"APIModules": {
+		"pagemediagallery_browse": "PageMediaGallery\\ApiBrowse"
 	},
 	"callback": "PageMediaGallery\\Hooks::onExtensionLoad",
 	"Hooks": {
@@ -41,6 +47,8 @@
 	"ResourceModules": {
 		"ext.pageMediaGallery": {
 			"scripts": [
+				"mediamanager.browsertab.js",
+				"mediamanager.js",
 				"pagemediagallery.ui.SecondaryGallery.js",
 				"pagemediagallery.ui.PrimaryGallery.js",
 				"pagemediagallery.ui.FileUploading.js",
@@ -52,6 +60,11 @@
 			],
 			"styles": [
 				"pageMediaGallery.css"
+			],
+			"messages": [
+				"pmg-no-match-found",
+				"pmg-no-more-match-found",
+				"pmg-error-encountered"
 			]
 		}
 	},

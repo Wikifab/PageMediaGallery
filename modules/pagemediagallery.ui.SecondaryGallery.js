@@ -7,7 +7,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 	/**
 	 * SecondaryGallery class
-	 * create html linked to form input to create a secondary gallery on inputs, linked to the PrimaryGallery for Upload and drag/drop
+	 * create html linked to form input to create a secondary gallery on inputs for Upload and drag/drop
 	 * container node should be the one with class .msuploadContainer
 	 *
 	 * possibles hooks fired :
@@ -18,11 +18,11 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 	 * @param container node
 	 * @constructor
 	 */
-	pagemediagallery.ui.SecondaryGallery = function ( container, primaryGallery ) {
+	pagemediagallery.ui.SecondaryGallery = function ( container ) {
 
 		var secondaryGallery = this;
 
-		this.primaryGallery = primaryGallery;
+		//this.primaryGallery = primaryGallery;
 		this.$container = container;
 
 		//file to be uploaded
@@ -41,11 +41,14 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 		var div = $('<div>').addClass('add-new-file-slot unsortable');
 		div.click(function (element){
-			if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
-				$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
+			// if($(element.target).parents('.msuploadContainer').get(0) && $($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0)){
+			// 	$($(element.target).parents('.msuploadContainer').get(0)).find('.buttonBar .select-file').get(0).click();
+			// }
+
+			if($(element.target).parents('.msuploadContainer').get(0) ){
+				MediaManager.start(secondaryGallery);
 			}
 		});
-		div.append($('<i>').addClass('fa fa-plus'));
 		ul.append(div);
 
 		if ( !this.hasEmptiesSlots() ){
@@ -68,7 +71,11 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 				secondaryGallery.addThumb( image.show(), $(this).val());
 			}
 		});
-		this.manageDropOnFormField();
+
+		for (var i = 0; i < this.numberEmptiesSlots() - 1; i++) {
+			ul.append( $('<div>').addClass('empty-slot unsortable') );
+		}
+		//this.manageDropOnFormField();
 		$(this.$container).find('ul').sortable({
 				items : "li:not(.unsortable)",
 			    start: function (e, ui) {
@@ -114,7 +121,8 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 		this.uploadButton.hide();
 
-		this.selectFileButton = $('<div>').addClass('select-file');
+		this.selectFileButton = $('<input>').addClass('select-file').attr('type', 'hidden'); //trick to hide it
+		//this.selectFileButton = $('<div>').addClass('select-file');
 		this.uploadIcon = $('<i>').addClass('fa fa-upload');
 		this.loadIcon = $('<i>').addClass('msupload-loading-button fa fa-spinner fa-spin fa-1x fa-fw');
 		this.loadIcon.hide();
@@ -123,7 +131,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		this.uploadButton.click(function() {
 			uploadIcon.hide();
 			loadIcon.show();
-			secondaryGallery.primaryGallery.startUpload();
+			//secondaryGallery.primaryGallery.startUpload();
 			return false;
 		});
 		this.uploadButton.append(this.uploadIcon);
@@ -241,6 +249,11 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 		$(this.$container).find('.formmediagallery ul .add-new-file-slot').before(li);
 
+		//remove empty slot
+		if ( $(this.$container).find('.empty-slot').get(0) ) {
+			$(this.$container).find('.empty-slot').last().remove();
+		}
+
 		mw.hook('pmg.secondaryGallery.newThumbAdded').fire(li);
 
 		return li;
@@ -255,7 +268,6 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		var filename = $(closeButton).parents('li').attr('data-filename');
 		$(closeButton).parents('li').remove();
 		if (filename) {
-
 			var inputs = $(this.$container).find('input.createboxInput');
 			if (inputs.length == 0) {
 				this.updateUploadButtonVisibility();
@@ -267,6 +279,12 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			if (inputs.length > 0) {
 				// remove filename from input
 				inputs.first().val('');
+				var inputName = inputs.first().attr('name');
+				// look for annotations linked to the input :
+				var annotationInput = $("input.editableImageDataInput[data-targetname='"+inputName+"']");
+				if (annotationInput.length > 0) {
+					annotationInput.first().val('');
+				}
 				this.clearErrorMessages();
 			}
 
@@ -285,6 +303,10 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 				var container = $(this.$container);
 				if ( $(container.find('.add-new-file-slot')).get(0) && $($(container.find('.add-new-file-slot')).get(0)).is(':hidden') ) {
 					$($(container.find('.add-new-file-slot')).get(0)).show();
+				}
+
+				if ( secondaryGallery.numberEmptiesSlots() > 1 ) {
+					$(container.find('.formmediagallery > ul')).append( $('<div>').addClass('empty-slot unsortable') );
 				}
 			}
 		}
@@ -397,6 +419,10 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 	 *  @param String filename filename to add
 	 */
 	pagemediagallery.ui.SecondaryGallery.prototype.addImage = function ( img, filename, tempToReplace) {
+
+		if (tempToReplace === undefined) {
+			tempToReplace = false;
+		}
 
 		var secondaryGallery = this;
 
@@ -537,12 +563,12 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 			var files = e.originalEvent.dataTransfer.files;
 
-			secondaryGallery.primaryGallery.open();
+			//secondaryGallery.primaryGallery.open();
 
 			secondaryGallery.affFilesToLoad(files);
 
 			// uploader.start();
-			secondaryGallery.primaryGallery.onRefresh();
+			//secondaryGallery.primaryGallery.onRefresh();
 
 		});
 

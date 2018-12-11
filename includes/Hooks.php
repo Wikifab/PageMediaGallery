@@ -20,6 +20,7 @@ class Hooks {
 		}
 
 	}
+
 	static function start( $pFFormEdit) {
 		global $wgOut, $wgScriptPath, $wgJsMimeType, $wgFileExtensions, $wgUser, $wgpmgEnabledForms;
 
@@ -49,15 +50,91 @@ class Hooks {
 		$pmgVars = json_encode ( $pmgVars );
 
 		if ($wgUser->getId ()) {
-			$galleryBody = self::getGalleryBody ( $wgOut->getTitle () );
-			$wgOut->addHTML ( $galleryBody );
+			$mediaManager = self::getModal();
+			$wgOut->addHTML ( $mediaManager );
 		}
 		$wgOut->addScript ( "<script type=\"$wgJsMimeType\">window.pmgVars = $pmgVars;</script>\n" );
+
 
 		return true;
 	}
 
+	private static function getModal() {
 
+		global $wgOut;
+
+		$out = '';
+
+		$out .= '<div class="modal" id="MediaManager" tabindex="-1" role="dialog" role="document">';
+		$out .=  '<div class="modal-dialog" role="document">';
+		$out .=    '<div class="modal-content">';
+		$out .=      '<div class="modal-header">';
+		$out .=        '<div class="cancel-container"><button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">';
+		$out .=          '<span>' . wfMessage('pmg-cancel') . '</span>';
+		$out .=        '</button></div>';
+		$out .=        '<h4 class="modal-title">' . wfMessage('pmg-mediamanager-title') . '</h4>';
+		$out .=        '<div class="insert-to-page-container"><button type="button" id="addToPage" class="btn btn-primary" disabled>' . wfMessage('pmg-insert-to-page') . '</button></div>';
+		$out .=      "</div><!-- end .modal-header --> \n";
+		$out .=      '<ul class="nav nav-tabs" id="tabContent">';
+
+		$out .=	      '<li class="active"><a href="#pmg-search" data-toggle="tab" role="tab" aria-controls="pmg-search" >' . wfMessage('pmg-tab-search') . '</a></li>';
+
+		$out .=	      '<li><a href="#upload" role="tab" aria-controls="upload" data-toggle="tab">' . wfMessage('pmg-tab-upload') . '</a></li>';
+
+		$out .=	      '<li><a href="#myMedia" role="tab" aria-controls="myMedia" data-toggle="tab">' . wfMessage('pmg-tab-mymedia') . '</a></li>';
+
+		$out .=	  '</ul>';
+		$out .=      '<div class="tab-content">';
+
+		$out .=       '<div class="tab-pane active" id="pmg-search">';
+		$out .=	        '<div class="search-input">';
+		$out .=	          '<input id="querymedia-input" class="querymediainput " type="text">';
+		$out .=	        '</div>';
+		$out .=	        '<div class="search-content">';
+		$out .=	          '<div class="search-content-body">';
+		$out .=	        	wfMessage('pmg-no-match-found');
+		$out .=	          '</div>';
+		$out .=           '<div class="load-more-content"><i style="display:none;" class="fa fa-spinner fa-spin fa-2x fa-fw load-more-content-spinner"></i>
+<span class="sr-only">Loading...</span></div>';
+		$out .=	        '</div>';
+		$out .=        '</div><!-- end #pmg-search --> ';
+
+		$out .=	      '<div class="tab-pane" id="upload">';
+		$out .=	    	self::getMediaManagerUploaderContent( );
+		$out .=	      '</div> ';
+
+		$out .=       '<div class="tab-pane" id="myMedia">';
+		$out .=	        '<div class="search-input">';
+		$out .=	          '<input id="querymedia-input-mymedia" class="querymediainput " type="text">';
+		$out .=	        '</div>';
+		$out .=	        '<div class="search-content">';
+		$out .=	          '<div class="search-content-body">';
+		$out .=	        	wfMessage('pmg-no-match-found');
+		$out .=	          '</div>';
+		$out .=           '<div class="load-more-content"><i style="display:none;" class="fa fa-spinner fa-spin fa-2x fa-fw load-more-content-spinner"></i>
+<span class="sr-only">Loading...</span></div>';
+		$out .=	        '</div>';
+		$out .=        '</div> <!-- end #myMedia --> ';
+
+		$out .=	    '</div><!-- end .tab-content --> ';
+		$out .=	  "</div><!-- end .modal-content -->\n";
+		$out .=    "</div><!-- end .modal-dialog -->\n";
+		$out .=  "</div><!-- end .modal #MediaManager -->\n";
+
+		return $out;
+	}
+
+	static function getMediaManagerUploaderContent() {
+
+		$out = '';
+		$out .= '<div>';
+		$out .=   '<div id="MediaManagerUploader">';
+		$out .=     '<div id="MsUpload"></div>';
+		$out .=   '</div>';
+		$out .= '</div>';
+
+		return $out;
+	}
 
 	public static function beforePageDisplay( $out ) {
 		$out->addModules( 'ext.userswatchbutton.js' );
