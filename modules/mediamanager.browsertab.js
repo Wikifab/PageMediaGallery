@@ -169,6 +169,7 @@ mediaWiki.pagemediagallery = mediaWiki.pagemediagallery || {};
 		$.each( results.search, function ( index, value ) {
 			var $div = $( document.createElement('div') );
 			$div.attr('data-imagename', value.filename);
+			$div.addClass( 'image' );
 			
 			var $file;
 
@@ -177,7 +178,6 @@ mediaWiki.pagemediagallery = mediaWiki.pagemediagallery || {};
 				$div.addClass('videofile');
 			} else {
 				$file = $( document.createElement('img') );
-				$div.addClass( 'image' );
 			}
 
 			$file.attr('src', value.fileurl);
