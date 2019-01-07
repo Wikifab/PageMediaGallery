@@ -387,6 +387,10 @@ body {
     opacity:1;
 }
 
+#MediaManager {
+    overflow: hidden;
+}
+
 #MediaManager .modal-content {
     float: left;
     width: 100%;
