@@ -64,10 +64,13 @@ class ApiBrowse extends ApiBase {
 			$semanticQueryResult = self::semanticQuery($query, $wgPageMediaGallerySearchLimit, 0, 'Modification date');
 		}
 
+
 		foreach ($semanticQueryResult as $key => $wikipage) {
 
 			$file = wfLocalFile(\Title::newFromDBkey($wikipage->getDBkey())->getText() );
 			$a = array();
+			//$wikipage->get
+			$a['title'] = $wikipage->getTitle()->getPrefixedDbKey() ;
 			$a['filename'] = $file->getName();
 			$a['mime'] = $file->getMimeType();
 			if ($file->getMimeType() == 'application/sla') {
@@ -90,7 +93,24 @@ class ApiBrowse extends ApiBase {
 				}
 
 			} else {
+				$thumbs = $file->getThumbnails();
+				$thumbfile = false;
+				foreach ($thumbs as $thumbnail) {
+					if (preg_match('/^([0-9]+)px/', $thumbnail, $matches)) {
+						$thumbfile = $thumbnail;
+						if($matches > 200) {
+							break;
+						}
+					}
+				}
+				if ( ! $thumbfile) {
+					$thumbfile = $file->generateThumbName($a['title'], [ 'width' => 200 ]);
+				}
+
 				$a['fileurl'] = $file->getUrl();
+				$a['width'] = $file->getWidth();
+				$a['height'] = $file->getHeight();
+				$a['thumburl'] = $file->getThumbUrl($thumbfile);
 			}
 			$r['search'][] = $a;
 
