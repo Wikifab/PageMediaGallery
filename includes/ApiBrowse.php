@@ -88,8 +88,10 @@ class ApiBrowse extends ApiBase {
 					$pages = $imageInfoResult['query']['pages'];
 
 					$a['fileurl'] = reset($pages)['imageinfo'][0]['thumburl'];
+					$a['url'] = reset($pages)['imageinfo'][0]['thumburl'];
 				} else {
 					$a['fileurl'] = $file->getUrl();
+					$a['url'] = $file->getFullUrl();
 				}
 
 			} else {
@@ -107,6 +109,7 @@ class ApiBrowse extends ApiBase {
 					$thumbfile = $file->generateThumbName($a['title'], [ 'width' => 200 ]);
 				}
 
+				$a['url'] = $file->getFullUrl();
 				$a['fileurl'] = $file->getUrl();
 				$a['width'] = $file->getWidth();
 				$a['height'] = $file->getHeight();
