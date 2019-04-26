@@ -17,6 +17,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 	// // Add windows to window manager using the addWindows() method.
 	// windowManager.addWindows( [ mediaManager ] );
+	/* OOUI - end */
 
 	/**
 	 * SecondaryGallery class
@@ -69,6 +70,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			// 	windowManager.openWindow( mediaManager );
 
 			// }
+			/* OOUI - end */
 		});
 		ul.append(div);
 
