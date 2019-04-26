@@ -47,8 +47,9 @@
 	"ResourceModules": {
 		"ext.pageMediaGallery": {
 			"scripts": [
-				"mediamanager.browsertab.js",
-				"mediamanager.js",
+				"mw.PmgTemplateUpload.BookletLayout.js",
+				"OO.ui.PmgSearchWidget.js",
+				"OO.ui.PageMediaGalleryDialog.js",
 				"pagemediagallery.ui.SecondaryGallery.js",
 				"pagemediagallery.ui.PrimaryGallery.js",
 				"pagemediagallery.ui.FileUploading.js",
@@ -56,7 +57,13 @@
 			],
 			"dependencies": [
 				"oojs",
-				"ext.MsUpload"
+				"ext.MsUpload",
+				"oojs",
+	            "oojs-ui",
+	            "oojs-ui-core",
+	           	"oojs-ui-windows",
+	           	"mediawiki.widgets.MediaSearch",
+	           	"mediawiki.ForeignStructuredUpload.BookletLayout"
 			],
 			"styles": [
 				"pageMediaGallery.css"
@@ -65,7 +72,17 @@
 				"pmg-no-match-found",
 				"pmg-no-more-match-found",
 				"pmg-error-encountered",
-				"pmg-load-more-results"
+				"pmg-load-more-results",
+				"pmg-dialog-action-cancel",
+				"pmg-dialog-action-insert",
+				"pmg-dialog-tabpanel-search",
+				"pmg-dialog-tabpanel-upload",
+				"pmg-dialog-media-upload",
+				"pmg-dialog-media-goback",
+				"pmg-dialog-media-save",
+				"pmg-dialog-tabpanel-search-mymedia",
+				"pmg-dialog-error-must-select-a-file",
+				"pmg-dialog-error-must-select-a-gallery"
 			]
 		}
 	},

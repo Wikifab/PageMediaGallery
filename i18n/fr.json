@@ -15,5 +15,15 @@
 	"pmg-insert-to-page": "Insérer dans la page",
 	"pmg-tab-search": "Rechercher",
 	"pmg-tab-upload": "Téléverser",
-	"pmg-tab-mymedia": "Mes images"
+	"pmg-tab-mymedia": "Mes images",
+	"pmg-dialog-action-cancel": "Annuler",
+	"pmg-dialog-action-insert": "Insérer dans la page",
+	"pmg-dialog-tabpanel-search": "Rechercher",
+	"pmg-dialog-tabpanel-search-mymedia": "Mes images",
+	"pmg-dialog-tabpanel-upload": "Téléverser",
+	"pmg-dialog-media-upload": "Téléverser",
+	"pmg-dialog-media-goback": "Retour",
+	"pmg-dialog-media-save": "Insérer dans la page",
+	"pmg-dialog-error-must-select-a-file": "Vous devez d'abord sélectionner un fichier!",
+	"pmg-dialog-error-must-select-a-gallery": "Aucune galerie rattachée!"
 }
