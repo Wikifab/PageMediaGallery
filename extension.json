@@ -50,6 +50,8 @@
 				"mw.PmgTemplateUpload.BookletLayout.js",
 				"OO.ui.PmgSearchWidget.js",
 				"OO.ui.PageMediaGalleryDialog.js",
+				"mediamanager.browsertab.js",
+				"mediamanager.js",
 				"pagemediagallery.ui.SecondaryGallery.js",
 				"pagemediagallery.ui.PrimaryGallery.js",
 				"pagemediagallery.ui.FileUploading.js",

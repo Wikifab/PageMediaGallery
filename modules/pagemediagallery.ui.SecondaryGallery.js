@@ -5,17 +5,18 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 ( function ( $, mw, pagemediagallery ) {
 	'use strict';
 
-	// Create and append the window manager.
-	var windowManager = new OO.ui.WindowManager();
-	$( document.body ).append( windowManager.$element );
+	/* OOUI */
+	// // Create and append the window manager.
+	// var windowManager = new OO.ui.WindowManager();
+	// $( document.body ).append( windowManager.$element );
 
-	// Create a new dialog window.
-	var mediaManager = new OO.ui.PageMediaGalleryDialog({
-		size: 'large'
-	});
+	// // Create a new dialog window.
+	// var mediaManager = new OO.ui.PageMediaGalleryDialog({
+	// 	size: 'large'
+	// });
 
-	// Add windows to window manager using the addWindows() method.
-	windowManager.addWindows( [ mediaManager ] );
+	// // Add windows to window manager using the addWindows() method.
+	// windowManager.addWindows( [ mediaManager ] );
 
 	/**
 	 * SecondaryGallery class
@@ -58,11 +59,16 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 			// }
 
 			if($(element.target).parents('.msuploadContainer').get(0) ){
-				mediaManager.setGallery(secondaryGallery);
-				// Open the window.
-				windowManager.openWindow( mediaManager );
-
+				MediaManager.start(secondaryGallery);
 			}
+
+			/* OOUI */
+			// if($(element.target).parents('.msuploadContainer').get(0) ){
+			// 	mediaManager.setGallery(secondaryGallery);
+			// 	// Open the window.
+			// 	windowManager.openWindow( mediaManager );
+
+			// }
 		});
 		ul.append(div);
 
