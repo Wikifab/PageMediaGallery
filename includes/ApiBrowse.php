@@ -73,7 +73,8 @@ class ApiBrowse extends ApiBase {
 			$a['title'] = $wikipage->getTitle()->getPrefixedDbKey() ;
 			$a['filename'] = $file->getName();
 			$a['mime'] = $file->getMimeType();
-			if ($file->getMimeType() == 'application/sla') {
+			$ext = strtolower(explode('.', $a['filename'])[1]);
+			if($ext == "stl"){
 
 				$requestParams['iiprop'] = 'url';
 				$requestParams['action'] = 'query';

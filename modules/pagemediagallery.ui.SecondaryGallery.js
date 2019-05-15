@@ -229,7 +229,7 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 		if ($videoHtml.length > 0){
 			$videoHtml.wrap('<div class="videofile"></div>');
 		}
-		if (ext == 'stl'){
+		if (ext.toLowerCase() == 'stl'){
 			$('<span>').addClass('stl-file').prependTo(imageWrapper);
 		}
 		var secondaryGallery = this;
