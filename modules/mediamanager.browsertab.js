@@ -190,6 +190,11 @@ mediaWiki.pagemediagallery = mediaWiki.pagemediagallery || {};
 			$file.addClass('file-thumb');
 			var $label = $( document.createElement('label') );
 			$label.html(value.filename);
+			if(MsUpload.isStl(value.filename)){
+				var $span = $( document.createElement('span') );
+				$span.addClass('stl-file');
+				$div.append($span);
+			}
 			$div.append($file);
 			$div.append($label);
 			$div.on('click', function() {
