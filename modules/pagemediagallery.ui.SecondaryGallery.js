@@ -445,6 +445,9 @@ pagemediagallery.ui = pagemediagallery.ui || {};
 
 		if ( result && !tempToReplace) {
 			var newItem = this.addThumb(img, filename, false, tempToReplace);
+			var loader = $('<div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>');
+			loader.hide();
+			loader.appendTo(newItem[0].children[0]);
 			this.updateImageInputsValues();
 			var fileinput = this.getInputForFile(filename);
 			mw.hook('pmg.secondaryGallery.newImageAdded').fire(fileinput, newItem, this);
