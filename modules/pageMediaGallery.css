@@ -593,9 +593,19 @@ body {
     text-align: center;
 }
 
+.pfImagePreviewWrapper .canvas-img{
+    position: absolute;
+}
+
 .pfImagePreviewWrapper .lds-grid {
+    display: inline-block;
+    position: relative;
     width: 64px;
     height: 64px;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .pfImagePreviewWrapper .lds-grid div {
     position: absolute;
