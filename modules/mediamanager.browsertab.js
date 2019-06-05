@@ -184,7 +184,10 @@ mediaWiki.pagemediagallery = mediaWiki.pagemediagallery || {};
 				$file.attr('src', value.fileurl);
 			} else {
 				$file = $( document.createElement('img') );
-				$file.attr('src', value.fileurl);
+				// TODO : we should use thumburl when available,
+				// but it cause issues for in annotation (for rotated image for instance)
+				//$file.attr('src', value.thumburl ? value.thumburl : value.fileurl);
+				$file.attr('src',  value.fileurl);
 			}
 
 			$file.addClass('file-thumb');
