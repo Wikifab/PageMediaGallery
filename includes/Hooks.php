@@ -144,7 +144,7 @@ class Hooks {
 
 		$len = strlen($filename);
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select(
 				'page',
 				array(
